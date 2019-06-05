@@ -14,7 +14,7 @@
 
     >
         <EditText
-                android:id="@+id/contactTitle"
+                android:id="@+id/contactSearchField"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:hint="Rechercher un contact"
@@ -28,7 +28,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:id="@+id/addContact"
-                android:layout_below="@id/contactTitle"
+                android:layout_below="@id/contactSearchField"
                 android:layout_weight="10"
                 android:background="@android:color/white"
                 android:contentDescription="Add contact button"

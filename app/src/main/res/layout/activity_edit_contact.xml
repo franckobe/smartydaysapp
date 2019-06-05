@@ -6,19 +6,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp"
-        tools:context=".activity.NewContactActivity">
-
+        tools:context=".activity.EditContactActivity">
 
     <TextView
-            android:id="@+id/newContactFirstnameLabel"
+            android:id="@+id/editContactFirstnameLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Prénom"
-            android:labelFor="@+id/newContactFirstname"
+            android:labelFor="@+id/editContactFirstname"
     />
     <EditText
-            android:layout_below="@+id/newContactFirstnameLabel"
-            android:id="@+id/newContactFirstname"
+            android:layout_below="@+id/editContactFirstnameLabel"
+            android:id="@+id/editContactFirstname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -26,16 +25,16 @@
             android:importantForAutofill="no" tools:targetApi="o"
     />
     <TextView
-            android:layout_below="@id/newContactFirstname"
-            android:id="@+id/newContactLastnameLabel"
+            android:layout_below="@id/editContactFirstname"
+            android:id="@+id/editContactLastnameLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Nom"
-            android:labelFor="@id/newContactLastname"
+            android:labelFor="@id/editContactLastname"
     />
     <EditText
-            android:layout_below="@id/newContactLastnameLabel"
-            android:id="@+id/newContactLastname"
+            android:layout_below="@id/editContactLastnameLabel"
+            android:id="@+id/editContactLastname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
@@ -43,16 +42,16 @@
             android:importantForAutofill="no" tools:targetApi="o"
     />
     <TextView
-            android:layout_below="@id/newContactLastname"
-            android:id="@+id/newContactEmailLabel"
+            android:layout_below="@id/editContactLastname"
+            android:id="@+id/editContactEmailLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Adresse mail"
-            android:labelFor="@+id/newContactEmail"
+            android:labelFor="@+id/editContactEmail"
     />
     <EditText
-            android:layout_below="@id/newContactEmailLabel"
-            android:id="@+id/newContactEmail"
+            android:layout_below="@id/editContactEmailLabel"
+            android:id="@+id/editContactEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textEmailAddress"
@@ -60,16 +59,16 @@
             android:importantForAutofill="no" tools:targetApi="o"
     />
     <TextView
-            android:layout_below="@id/newContactEmail"
-            android:id="@+id/newContactAddressLabel"
+            android:layout_below="@id/editContactEmail"
+            android:id="@+id/editContactAddressLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Adresse postale"
-            android:labelFor="@id/newContactAddress"
+            android:labelFor="@id/editContactAddress"
     />
     <EditText
-            android:layout_below="@+id/newContactAddressLabel"
-            android:id="@+id/newContactAddress"
+            android:layout_below="@+id/editContactAddressLabel"
+            android:id="@+id/editContactAddress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPostalAddress"
@@ -78,11 +77,11 @@
     />
 
     <Button
-            android:layout_below="@+id/newContactAddress"
-            android:id="@+id/btnAddNewContact"
+            android:layout_below="@+id/editContactAddress"
+            android:id="@+id/btnAddeditContact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ajouter"
+            android:text="Modifier"
     />
 
 </RelativeLayout>
