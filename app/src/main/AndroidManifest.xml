@@ -10,6 +10,11 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity
+                android:name=".activity.NewContactActivity"
+                android:label="@string/title_activity_new_contact"
+        >
+        </activity>
+        <activity
                 android:name=".activity.MainActivity"
                 android:label="@string/title_activity_main"
                 android:theme="@style/AppTheme.NoActionBar">

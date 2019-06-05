@@ -1,14 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context=".fragment.Item2Fragment">
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+         xmlns:tools="http://schemas.android.com/tools"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent"
+         tools:context=".fragment.Item2Fragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+            android:id="@+id/search_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/item2"/>
+              android:layout_height="50dp"
+              android:orientation="horizontal"
 
-</FrameLayout>
+    >
+        <EditText
+                android:id="@+id/contactTitle"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:hint="Rechercher un contact"
+                android:layout_weight="90"
+                android:importantForAutofill="no"
+                tools:targetApi="o"
+                android:inputType="text"
+        />
+        <ImageButton
+                android:src="@drawable/ic_person_add"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:id="@+id/addContact"
+                android:layout_below="@id/contactTitle"
+                android:layout_weight="10"
+                android:background="@android:color/white"
+                android:contentDescription="Add contact button"
+        />
+
+    </LinearLayout>
+
+    <View android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+    />
+
+</RelativeLayout>

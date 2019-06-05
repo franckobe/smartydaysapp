@@ -1,0 +1,10 @@
+package com.ynovaix.smartydays.model
+
+object ContactTable {
+    const val NAME = "Contact"
+    const val ID = "_id"
+    const val FIRSTNAME = "firstname"
+    const val LASTNAME = "lastname"
+    const val EMAIL = "email"
+    const val ADDRESS = "address"
+}
