@@ -28,6 +28,8 @@
     <string name="item5">Item 5</string>
     <string name="title_activity_new_contact">Nouveau contact</string>
     <string name="contactMenuItem">Contact</string>
+    <string name="todo_list">Todo list</string>
+    <string name="titre">Titre</string>
 
 
 </resources>

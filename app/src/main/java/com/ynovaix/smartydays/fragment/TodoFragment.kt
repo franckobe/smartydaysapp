@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.ynovaix.smartydays.R
 
-class Item5Fragment : Fragment() {
+class TodoFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

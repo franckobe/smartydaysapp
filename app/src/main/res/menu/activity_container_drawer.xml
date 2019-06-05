@@ -23,7 +23,7 @@
         <item
                 android:id="@+id/item5"
                 android:icon="@drawable/ic_menu_chevron_right"
-                android:title="@string/item5"/>
+                android:title="@string/todo_list"/>
     </group>
 
 
