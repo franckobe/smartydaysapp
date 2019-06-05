@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 currentFragment = Item1Fragment()
                 replaceFragment()
             }
-            R.id.item2 -> {
+            R.id.contactMenuItem -> {
                 currentFragment = ContactFragment()
                 replaceFragment()
             }

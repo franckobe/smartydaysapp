@@ -2,6 +2,7 @@ package com.ynovaix.smartydays.fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,56 +11,55 @@ import com.ynovaix.smartydays.activity.NewContactActivity
 import com.ynovaix.smartydays.model.Contact
 import com.ynovaix.smartydays.model.ContactDb
 import com.ynovaix.smartydays.model.ContactDbHelper
-import kotlinx.android.synthetic.main.fragment_item2.*
-import kotlinx.android.synthetic.main.fragment_item2.view.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.info
-import org.jetbrains.anko.startActivity
+import com.ynovaix.smartydays.util.ContactAdapter
+import com.ynovaix.smartydays.util.EmptyAdapter
+import kotlinx.android.synthetic.main.fragment_contact.*
+import kotlinx.android.synthetic.main.fragment_contact.view.*
+import org.jetbrains.anko.*
 
 class ContactFragment : Fragment(), AnkoLogger {
 
     private val contactDb by lazy { ContactDb(ContactDbHelper(context?.applicationContext)) }
     private var list = listOf<Contact>()
+    private lateinit var contactAdapter: ContactAdapter
+    private lateinit var contactView: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val view: View = inflater.inflate(R.layout.fragment_item2, container, false)
-        view.addContact.setOnClickListener {
+        contactView = inflater.inflate(R.layout.fragment_contact, container, false)
+
+        contactView.addContact.setOnClickListener {
             launchAddContactActivity()
         }
+
+        contactAdapter = ContactAdapter(list)
+        contactView.contactRecyclerView.layoutManager = LinearLayoutManager(context?.applicationContext)
+        contactView.contactRecyclerView.adapter = EmptyAdapter()
+
         updateList()
 
         // Inflate the layout for this fragment
-        return view
+        return contactView
     }
 
     private fun launchAddContactActivity() {
         context?.startActivity<NewContactActivity>()
     }
 
-    private fun deleteContact(contact: Contact) {
-        doAsync {
-            contactDb.delete(contact)
-            updateList()
-            showList()
-        }
-    }
-
     private fun updateList() {
         doAsync {
             list = contactDb.getAll()
-            showList()
+            uiThread {
+                updateAdapter()
+            }
         }
     }
 
-    private fun showList() {
-        info("NB CONTACT : ${list.size}")
-        for (c in list)
-            info("${c.id} : ${c.firstname} ${c.lastname}")
+    private fun updateAdapter() {
+        contactView.contactRecyclerView.adapter = ContactAdapter(list)
     }
 
     override fun toString(): String {

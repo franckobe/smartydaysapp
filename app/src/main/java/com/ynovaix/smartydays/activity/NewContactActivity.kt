@@ -10,6 +10,7 @@ import com.ynovaix.smartydays.util.ContactRequestCode
 import kotlinx.android.synthetic.main.activity_new_contact.*
 import org.jetbrains.anko.custom.async
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class NewContactActivity : AppCompatActivity() {
 
@@ -35,7 +36,9 @@ class NewContactActivity : AppCompatActivity() {
         )
         doAsync {
             contactDb.save(contact)
-            finishActivity(ContactRequestCode.InsertionSuccess.code)
+            uiThread {
+                finish()
+            }
         }
     }
 

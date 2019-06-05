@@ -9,9 +9,9 @@
                 android:icon="@drawable/ic_menu_dashboard"
                 android:title="@string/item1"/>
         <item
-                android:id="@+id/item2"
-                android:icon="@drawable/ic_menu_chevron_right"
-                android:title="@string/item2"/>
+                android:id="@+id/contactMenuItem"
+                android:icon="@drawable/ic_person"
+                android:title="@string/contactMenuItem"/>
         <item
                 android:id="@+id/item3"
                 android:icon="@drawable/ic_menu_chevron_right"
