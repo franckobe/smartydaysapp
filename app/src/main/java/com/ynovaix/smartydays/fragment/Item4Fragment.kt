@@ -17,4 +17,8 @@ class Item4Fragment : Fragment() {
         return inflater.inflate(R.layout.fragment_item4, container, false)
     }
 
+    override fun toString(): String {
+        return "item4_fragment"
+    }
+
 }

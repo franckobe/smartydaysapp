@@ -17,10 +17,10 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivity
 
-class Item2Fragment : Fragment(), AnkoLogger {
+class ContactFragment : Fragment(), AnkoLogger {
 
     private val contactDb by lazy { ContactDb(ContactDbHelper(context?.applicationContext)) }
-    var list = listOf<Contact>()
+    private var list = listOf<Contact>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,6 +60,10 @@ class Item2Fragment : Fragment(), AnkoLogger {
         info("NB CONTACT : ${list.size}")
         for (c in list)
             info("${c.id} : ${c.firstname} ${c.lastname}")
+    }
+
+    override fun toString(): String {
+        return "contact_fragment"
     }
 
 }

@@ -2,6 +2,7 @@ package com.ynovaix.smartydays.activity
 
 import android.os.Bundle
 import android.support.design.widget.NavigationView
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
 import android.support.v4.widget.DrawerLayout
@@ -16,6 +17,7 @@ import com.ynovaix.smartydays.fragment.*
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener
 {
 
+    private lateinit var currentFragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,11 +35,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        val fragmentManager: FragmentManager = supportFragmentManager
-        fragmentManager.beginTransaction().replace(
-            R.id.main_content,
-            Item1Fragment()
-        ).commit()
+        currentFragment = Item1Fragment()
+        replaceFragment()
         navView.setCheckedItem(R.id.item1)
 
         navView.setNavigationItemSelectedListener(this)
@@ -68,42 +67,71 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         }
     }
 
-    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+    private fun replaceFragment() {
         val fragmentManager: FragmentManager = supportFragmentManager
+        fragmentManager.beginTransaction().replace(
+            R.id.main_content,
+            currentFragment
+        ).commit()
+    }
+
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item1 -> {
-                fragmentManager.beginTransaction().replace(
-                    R.id.main_content,
-                    Item1Fragment()
-                ).commit()
+                currentFragment = Item1Fragment()
+                replaceFragment()
             }
             R.id.item2 -> {
-                fragmentManager.beginTransaction().replace(
-                    R.id.main_content,
-                    Item2Fragment()
-                ).commit()
+                currentFragment = ContactFragment()
+                replaceFragment()
             }
             R.id.item3 -> {
-                fragmentManager.beginTransaction().replace(
-                    R.id.main_content,
-                    Item3Fragment()
-                ).commit()
+                currentFragment = Item3Fragment()
+                replaceFragment()
             }
             R.id.item4 -> {
-                fragmentManager.beginTransaction().replace(
-                    R.id.main_content,
-                    Item4Fragment()
-                ).commit()
+                currentFragment = Item4Fragment()
+                replaceFragment()
             }
             R.id.item5 -> {
-                fragmentManager.beginTransaction().replace(
-                    R.id.main_content,
-                    Item5Fragment()
-                ).commit()
+                currentFragment = Item5Fragment()
+                replaceFragment()
             }
         }
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        outState?.putString("fragment",currentFragment.toString())
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        when (savedInstanceState?.getString("fragment")) {
+            "item1_fragment" -> {
+                currentFragment = Item1Fragment()
+                replaceFragment()
+            }
+            "contact_fragment" -> {
+                currentFragment = ContactFragment()
+                replaceFragment()
+            }
+            "item3_fragment" -> {
+                currentFragment = Item3Fragment()
+                replaceFragment()
+            }
+            "item4_fragment" -> {
+                currentFragment = Item4Fragment()
+                replaceFragment()
+            }
+            "item5_fragment" -> {
+                currentFragment = Item5Fragment()
+                replaceFragment()
+            }
+        }
+    }
+
 }
