@@ -4,6 +4,7 @@ import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.delete
+import org.jetbrains.anko.db.update
 
 class TaskDb(private val dbHelper: TaskDbHelper) {
 
@@ -17,10 +18,11 @@ class TaskDb(private val dbHelper: TaskDbHelper) {
     }
 
     fun save(task: Task) = dbHelper.use {
+        val done = 0
         insert(
             TaskTable.NAME,
             TaskTable.LABEL to task.label,
-            TaskTable.DONE to task.done
+            TaskTable.DONE to done
         )
     }
 
@@ -29,6 +31,14 @@ class TaskDb(private val dbHelper: TaskDbHelper) {
             TaskTable.NAME,
             "${TaskTable.ID} = ${task.id}"
         )
+    }
+
+    fun update(task: Task) = dbHelper.use {
+        val done = if (task.done) 0 else 1
+        update(
+            TaskTable.NAME,
+            TaskTable.DONE to done
+        ).whereArgs("${TaskTable.ID} = ${task.id}")
     }
 
 }

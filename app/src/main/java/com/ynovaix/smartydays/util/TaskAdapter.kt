@@ -34,9 +34,7 @@ class TaskAdapter(private var items: List<Task>, private val listener: OnItemCli
             itemView.list_item_task_label.text = task.label
             itemView.list_item_task_done.isChecked = task.done
             itemView.setOnClickListener { listener.onItemClick(task) }
-            itemView.list_item_task_done.setOnCheckedChangeListener(
-                
-            )
+            itemView.list_item_task_done.setOnClickListener { switchListener.onItemChecked(task) }
         }
     }
 

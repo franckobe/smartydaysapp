@@ -6,6 +6,7 @@ import com.ynovaix.smartydays.R
 import com.ynovaix.smartydays.model.*
 import kotlinx.android.synthetic.main.activity_todo.*
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class CreateTaskActivity : AppCompatActivity() {
 
@@ -22,6 +23,9 @@ class CreateTaskActivity : AppCompatActivity() {
     private fun createTask(){
         doAsync {
             taskDb.save(Task(0, labelText.text.toString(), false))
+            uiThread {
+                finish()
+            }
         }
     }
 }
