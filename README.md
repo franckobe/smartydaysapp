@@ -2,6 +2,8 @@
 Par Thomas Angelini, Franck Garros et Bruno Guignard
 
 ## Concept
+Application destinée à l'encadrement des YDays, liée au backend Symfony, permettant entre autre de gérer des utilisateurs avec des rôles distincts (étudiant, encadrant, porteur de projet externe, manager).
+Par manque de temps et difficultés, nous avons développé des modules pouvant être utiles dans la future application. 
 
 ## Fonctionnalités développées
 * Gestion d'une équipe (style répertoire)
