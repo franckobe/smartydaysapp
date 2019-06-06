@@ -9,12 +9,17 @@ import com.ynovaix.smartydays.R
 
 class Item4Fragment : Fragment() {
 
+    private lateinit var myView: View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        myView = inflater.inflate(R.layout.fragment_item4, container, false)
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_item4, container, false)
+        return myView
     }
 
     override fun toString(): String {

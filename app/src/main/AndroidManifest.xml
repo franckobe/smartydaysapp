@@ -15,8 +15,6 @@
 
         <activity android:name=".activity.MapActivity">
         </activity>
-        <activity android:name=".activity.CreateTaskActivity">
-        </activity>
         <activity android:name=".activity.EditContactActivity"
                   android:label="@string/title_edit_contact_activity"
         >

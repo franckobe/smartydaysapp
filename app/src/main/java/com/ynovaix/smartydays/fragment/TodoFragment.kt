@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import com.ynovaix.smartydays.R
 import com.ynovaix.smartydays.activity.TodoActivity
 import com.ynovaix.smartydays.model.Task
@@ -14,7 +13,7 @@ import com.ynovaix.smartydays.model.TaskDb
 import com.ynovaix.smartydays.model.TaskDbHelper
 import com.ynovaix.smartydays.util.EmptyAdapter
 import com.ynovaix.smartydays.util.TaskAdapter
-import kotlinx.android.synthetic.main.fragment_item5.view.*
+import kotlinx.android.synthetic.main.fragment_todo.view.*
 import org.jetbrains.anko.*
 
 class TodoFragment : Fragment(), AnkoLogger {
@@ -32,7 +31,7 @@ class TodoFragment : Fragment(), AnkoLogger {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        todoView = inflater.inflate(R.layout.fragment_item5, container, false)
+        todoView = inflater.inflate(R.layout.fragment_todo, container, false)
         todoView.button.setOnClickListener {
             context?.startActivity<TodoActivity>()
         }
@@ -47,9 +46,6 @@ class TodoFragment : Fragment(), AnkoLogger {
     private fun updateRecyclerView() {
         doAsync {
             list = taskDb.getAll()
-            for (item in list) {
-                info("${item.id} : ${item.done}")
-            }
             uiThread {
                 todoView.task_list.adapter = TaskAdapter(list, object : TaskAdapter.OnSwitchChangeListener {
                     override fun onItemChecked(task: Task, checked: Boolean) {
@@ -63,7 +59,7 @@ class TodoFragment : Fragment(), AnkoLogger {
     }
 
     override fun toString(): String {
-        return "item5_fragment"
+        return "todo_fragment"
     }
 
 }

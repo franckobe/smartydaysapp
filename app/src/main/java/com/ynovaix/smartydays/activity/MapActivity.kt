@@ -1,59 +1,88 @@
 package com.ynovaix.smartydays.activity
 
-import android.support.v7.app.AppCompatActivity
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
+import com.mapbox.geojson.Feature
+import com.mapbox.geojson.Point
 import com.mapbox.mapboxsdk.Mapbox
+import com.mapbox.mapboxsdk.maps.Style
+import com.mapbox.mapboxsdk.maps.MapView
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory
+import com.mapbox.mapboxsdk.style.layers.SymbolLayer
+import com.mapbox.mapboxsdk.style.sources.GeoJsonSource
 import com.ynovaix.smartydays.R
 import kotlinx.android.synthetic.main.fragment_map.*
 
 class MapActivity : AppCompatActivity() {
 
+    private var mapView: MapView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mapbox.onCreate(savedInstanceState)
+        Mapbox.getInstance(this, getString(R.string.access_token))
+        setContentView(R.layout.activity_main)
+        mapView = mapViewLayout
+        mapView!!.onCreate(savedInstanceState)
+        mapView!!.getMapAsync { mapboxMap ->
+            mapboxMap.setStyle(Style.LIGHT) { style ->
+                // Add the marker image to map
+                style.addImage(
+                    "marker-icon-id",
+                    BitmapFactory.decodeResource(
+                        this@MapActivity.resources, R.drawable.mapbox_marker_icon_default
+                    )
+                )
 
-        Mapbox.getInstance(
-            this,
-            "pk.eyJ1IjoidGhvbWFzYW5nZWxpbmkiLCJhIjoiY2p3anBmcW1sMG02cTQwbjYyOG5mbnN6eCJ9.Sd6HjWyahzr_1ennL_k_0A"
-        )
-        setContentView(R.layout.fragment_map)
+                val geoJsonSource = GeoJsonSource(
+                    "source-id", Feature.fromGeometry(
+                        Point.fromLngLat(-87.679, 41.885)
+                    )
+                )
+                style.addSource(geoJsonSource)
+
+                val symbolLayer = SymbolLayer("layer-id", "source-id")
+                symbolLayer.withProperties(
+                    PropertyFactory.iconImage("marker-icon-id")
+                )
+                style.addLayer(symbolLayer)
+            }
+        }
     }
 
-    @SuppressWarnings("MissingPermission")
-    override fun onStart() {
+    // Add the mapView's own lifecycle methods to the activity's lifecycle methods
+    public override fun onStart() {
         super.onStart()
-        mapbox.onStart()
+        mapView!!.onStart()
     }
 
-    override fun onResume() {
+    public override fun onResume() {
         super.onResume()
-        mapbox.onResume()
+        mapView!!.onResume()
     }
 
-    override fun onPause() {
+    public override fun onPause() {
         super.onPause()
-        mapbox.onPause()
+        mapView!!.onPause()
     }
 
-    override fun onStop() {
+    public override fun onStop() {
         super.onStop()
-        mapbox.onStop()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mapbox.onDestroy()
+        mapView!!.onStop()
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        mapbox.onLowMemory()
+        mapView!!.onLowMemory()
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onDestroy() {
+        super.onDestroy()
+        mapView!!.onDestroy()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        if (outState != null) {
-            mapbox.onSaveInstanceState(outState)
-        }
+        mapView!!.onSaveInstanceState(outState)
     }
 }
