@@ -36,4 +36,28 @@ class ContactDb(private val dbHelper: ContactDbHelper) {
         )
     }
 
+    fun getAllBySearch(str: String) = dbHelper.use {
+        select(
+            ContactTable.NAME,
+            ContactTable.ID,
+            ContactTable.FIRSTNAME,
+            ContactTable.LASTNAME,
+            ContactTable.EMAIL,
+            ContactTable.ADDRESS
+        )
+            .whereArgs("${ContactTable.FIRSTNAME} LIKE '%$str%' OR ${ContactTable.LASTNAME} LIKE '%$str%'")
+            .parseList(classParser<Contact>())
+    }
+
+    fun getOneById(id: Int) = dbHelper.use {
+        select(
+            ContactTable.NAME,
+            ContactTable.ID,
+            ContactTable.FIRSTNAME,
+            ContactTable.LASTNAME,
+            ContactTable.EMAIL,
+            ContactTable.ADDRESS
+        ).whereArgs("${ContactTable.ID} = $id").parseList(classParser<Contact>()).first()
+    }
+
 }

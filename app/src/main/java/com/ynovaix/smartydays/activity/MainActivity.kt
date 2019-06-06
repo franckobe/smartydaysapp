@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 replaceFragment()
             }
             R.id.item5 -> {
-                currentFragment = Item5Fragment()
+                currentFragment = TodoFragment()
                 replaceFragment()
             }
         }
@@ -128,7 +128,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 replaceFragment()
             }
             "item5_fragment" -> {
-                currentFragment = Item5Fragment()
+                currentFragment = TodoFragment()
                 replaceFragment()
             }
         }

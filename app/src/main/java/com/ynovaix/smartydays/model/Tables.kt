@@ -8,3 +8,10 @@ object ContactTable {
     const val EMAIL = "email"
     const val ADDRESS = "address"
 }
+
+object TaskTable{
+    const val NAME = "Task"
+    const val ID = "_id"
+    const val LABEL = "label"
+    const val DONE = "done"
+}
