@@ -1,12 +1,14 @@
 package com.ynovaix.smartydays.model
 
+import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.db.classParser
 import org.jetbrains.anko.db.select
 import org.jetbrains.anko.db.insert
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.update
+import org.jetbrains.anko.info
 
-class TaskDb(private val dbHelper: TaskDbHelper) {
+class TaskDb(private val dbHelper: TaskDbHelper): AnkoLogger {
 
     fun getAll() = dbHelper.use {
         select(
@@ -33,12 +35,13 @@ class TaskDb(private val dbHelper: TaskDbHelper) {
         )
     }
 
-    fun update(task: Task) = dbHelper.use {
-        val done = if (task.done) 0 else 1
+    fun update(task: Task, done: Int) = dbHelper.use {
         update(
-            TaskTable.NAME,
-            TaskTable.DONE to done
-        ).whereArgs("${TaskTable.ID} = ${task.id}")
+                TaskTable.NAME,
+        TaskTable.DONE to done
+        )
+        .whereArgs("${TaskTable.ID} = ${task.id}")
+        .exec()
     }
 
 }

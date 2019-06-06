@@ -8,7 +8,9 @@ import com.ynovaix.smartydays.model.ContactDb
 import com.ynovaix.smartydays.model.ContactDbHelper
 import com.ynovaix.smartydays.util.ContactRequestCode
 import kotlinx.android.synthetic.main.activity_new_contact.*
+import org.jetbrains.anko.contentView
 import org.jetbrains.anko.custom.async
+import org.jetbrains.anko.design.snackbar
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -34,11 +36,16 @@ class NewContactActivity : AppCompatActivity() {
             newContactEmail.text.toString(),
             newContactAddress.text.toString()
         )
-        doAsync {
-            contactDb.save(contact)
-            uiThread {
-                finish()
+        if (contact.checkIntegrity()) {
+            doAsync {
+                contactDb.save(contact)
+                uiThread {
+                    finish()
+                }
             }
+        }
+        else {
+            contentView?.snackbar("Une erreur a été détectée dans votre saisie !")
         }
     }
 

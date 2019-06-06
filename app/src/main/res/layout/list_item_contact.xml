@@ -11,7 +11,7 @@
             android:id="@+id/list_item_contact_firstname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Prénom"
+            android:text="@string/pr_nom"
             android:textSize="20sp"
     />
     <TextView
@@ -20,7 +20,7 @@
             android:id="@+id/list_item_contact_lastname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nom"
+            android:text="@string/nom"
             android:textSize="20sp"
     />
 

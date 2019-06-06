@@ -23,6 +23,11 @@ class TodoFragment : Fragment(), AnkoLogger {
     private var list = listOf<Task>()
     private lateinit var todoView: View
 
+    override fun onResume() {
+        super.onResume()
+        updateRecyclerView()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,16 +47,14 @@ class TodoFragment : Fragment(), AnkoLogger {
     private fun updateRecyclerView() {
         doAsync {
             list = taskDb.getAll()
-            info { list.size }
+            for (item in list) {
+                info("${item.id} : ${item.done}")
+            }
             uiThread {
-                todoView.task_list.adapter = TaskAdapter(list, object : TaskAdapter.OnItemClickListener {
-                    override fun onItemClick(task: Task) {
-
-                    }
-
-                }, object : TaskAdapter.OnSwitchChangeListener {
-                    override fun onItemChecked(task: Task) {
-                        taskDb.update(task)
+                todoView.task_list.adapter = TaskAdapter(list, object : TaskAdapter.OnSwitchChangeListener {
+                    override fun onItemChecked(task: Task, checked: Boolean) {
+                        val done = if (checked) 1 else 0
+                        taskDb.update(task, done)
                     }
 
                 })

@@ -1,9 +1,6 @@
 package com.ynovaix.smartydays.model
 
-import org.jetbrains.anko.db.classParser
-import org.jetbrains.anko.db.select
-import org.jetbrains.anko.db.insert
-import org.jetbrains.anko.db.delete
+import org.jetbrains.anko.db.*
 
 class ContactDb(private val dbHelper: ContactDbHelper) {
 
@@ -58,6 +55,18 @@ class ContactDb(private val dbHelper: ContactDbHelper) {
             ContactTable.EMAIL,
             ContactTable.ADDRESS
         ).whereArgs("${ContactTable.ID} = $id").parseList(classParser<Contact>()).first()
+    }
+
+    fun update(contact: Contact) = dbHelper.use {
+        update(
+            ContactTable.NAME,
+            ContactTable.FIRSTNAME to contact.firstname,
+            ContactTable.LASTNAME to contact.lastname,
+            ContactTable.EMAIL to contact.email,
+            ContactTable.ADDRESS to contact.address
+        )
+            .whereArgs("${ContactTable.ID} = ${contact.id}")
+            .exec()
     }
 
 }

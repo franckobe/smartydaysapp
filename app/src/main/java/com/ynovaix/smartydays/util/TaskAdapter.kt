@@ -9,10 +9,10 @@ import com.ynovaix.smartydays.model.Task
 import kotlinx.android.synthetic.main.list_item_task.view.*
 
 
-class TaskAdapter(private var items: List<Task>, private val listener: OnItemClickListener,  private val switchListener: OnSwitchChangeListener): RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
+class TaskAdapter(private var items: List<Task>, private val switchListener: OnSwitchChangeListener): RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindTask(items[position], listener, switchListener)
+        holder.bindTask(items[position], switchListener)
     }
 
     override fun getItemCount(): Int {
@@ -30,20 +30,18 @@ class TaskAdapter(private var items: List<Task>, private val listener: OnItemCli
     }
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        fun bindTask(task: Task, listener: OnItemClickListener, switchListener: OnSwitchChangeListener) {
+        fun bindTask(task: Task, switchListener: OnSwitchChangeListener) {
             itemView.list_item_task_label.text = task.label
-            itemView.list_item_task_done.isChecked = task.done
-            itemView.setOnClickListener { listener.onItemClick(task) }
-            itemView.list_item_task_done.setOnClickListener { switchListener.onItemChecked(task) }
+            itemView.list_item_task_done.isChecked = task.done == 1
+            itemView.list_item_task_done.setOnCheckedChangeListener { buttonView, isChecked ->
+                switchListener.onItemChecked(task, isChecked)
+            }
         }
     }
 
-    interface OnItemClickListener {
-        fun onItemClick(task: Task)
-    }
     interface OnSwitchChangeListener
     {
-        fun onItemChecked(task: Task)
+        fun onItemChecked(task: Task, checked: Boolean)
     }
 
 }

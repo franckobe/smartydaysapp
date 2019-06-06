@@ -10,22 +10,9 @@ import org.jetbrains.anko.uiThread
 
 class CreateTaskActivity : AppCompatActivity() {
 
-    private val taskDb by lazy { TaskDb(TaskDbHelper(applicationContext)) }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_task)
+    }
 
-        saveButton.setOnClickListener {
-            createTask()
-        }
-    }
-    private fun createTask(){
-        doAsync {
-            taskDb.save(Task(0, labelText.text.toString(), false))
-            uiThread {
-                finish()
-            }
-        }
-    }
 }
