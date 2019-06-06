@@ -13,7 +13,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
 
-        <activity android:name=".activity.MapActivity">
+        <activity android:name=".activity.MapActivity"></activity>
         <activity android:name=".activity.EditContactActivity">
         </activity>
         <activity android:name=".activity.TodoActivity">

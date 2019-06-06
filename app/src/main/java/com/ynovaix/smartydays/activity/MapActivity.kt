@@ -10,11 +10,12 @@ class MapActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mapbox.onCreate(savedInstanceState)
+
         Mapbox.getInstance(
             this,
             "pk.eyJ1IjoidGhvbWFzYW5nZWxpbmkiLCJhIjoiY2p3anBmcW1sMG02cTQwbjYyOG5mbnN6eCJ9.Sd6HjWyahzr_1ennL_k_0A"
         )
-        mapbox.onCreate(savedInstanceState)
         setContentView(R.layout.fragment_map)
     }
 

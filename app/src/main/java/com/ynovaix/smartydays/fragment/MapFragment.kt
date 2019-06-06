@@ -19,7 +19,7 @@ class MapFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        mapFragment = inflater.inflate(R.layout.fragment_map, container, false)
+        mapFragment = inflater.inflate(R.layout.fragment_item1, container, false)
         return mapFragment
     }
 
