@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.ynovaix.smartydays">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -9,10 +12,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".activity.MapActivity">
+        </activity>
         <activity
                 android:name=".activity.NewContactActivity"
-                android:label="@string/title_activity_new_contact"
-        >
+                android:label="@string/title_activity_new_contact">
         </activity>
         <activity
                 android:name=".activity.MainActivity"

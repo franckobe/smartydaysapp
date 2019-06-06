@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
-        currentFragment = Item1Fragment()
+        currentFragment = MapFragment()
         replaceFragment()
         navView.setCheckedItem(R.id.item1)
 
@@ -77,8 +77,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.item1 -> {
-                currentFragment = Item1Fragment()
+            R.id.mapbox -> {
+                currentFragment = MapFragment()
                 replaceFragment()
             }
             R.id.contactMenuItem -> {
@@ -111,8 +111,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
         super.onRestoreInstanceState(savedInstanceState)
         when (savedInstanceState?.getString("fragment")) {
-            "item1_fragment" -> {
-                currentFragment = Item1Fragment()
+            "map_fragment" -> {
+                currentFragment = MapFragment()
                 replaceFragment()
             }
             "contact_fragment" -> {
